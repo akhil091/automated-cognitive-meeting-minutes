@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Who Said What</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/whosaidwhat.png" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="">
+        <nav class="navbar navbar-light bg-light d-flex">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/whosaidwhat.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Who Said What
+            </a>
+            <div class="ml-auto p-2">
+                <button type="button" class="btn btn-primary" id="myBtn">Add New User</button>
+                <button type="button" class="btn btn-success" @click="this.export">Export</button>
+            </div>
+        </nav>
+        <div id="all">
+            <div class="bodies" id="first">
+                <div v-for="item in transcript">
+                    <div
+                        :class="{'speech': true, 'MickeyMouse': item[0] === 'MickeyMouse', 'Jimmy': item[0] === 'Jimmy', 'Sorina': item[0] === 'Sorina', 'Unknown': item[0] === 'Unknown'}">
+                        {{ item[0] }}: {{item[1]}}
+                    </div>
+                </div>
+            </div>
+            <div class="bodies" id="second">
+                <div id="talker">
+                    <div :class="speakerClass"></div>
+                    <div v-if="currentSpeaker">
+                        {{currentSpeaker}} is speaking.
+                    </div>
+                </div>
+            </div>
+
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <input class="m-2" v-model.trim="inputText" placeholder="Speaker Name">
+                    <button type="button" class="m-2 btn btn-primary" id="recordButton" @click="this.create">Start
+                        Recording</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
